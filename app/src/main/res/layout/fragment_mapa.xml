@@ -1,18 +1,28 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.tyddolphin.apppadres.FragmentMapa">
-
-
-    <TextView
+    <GridView
+        android:layout_height="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#DDDDDD"
+        ></GridView>
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center">
 
     </com.google.android.gms.maps.MapView>
-</FrameLayout>
+    <GridView
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="#DDDDDD"
+        ></GridView>
+
+
+</LinearLayout>
