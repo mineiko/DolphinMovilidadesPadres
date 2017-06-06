@@ -15,7 +15,7 @@ class SeccionesPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-
+        if(position==1)return new FragmentHijos();
 
         return new FragmentMapa();
 

@@ -4,11 +4,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.tyddolphin.apppadres.FragmentMapa">
-    <GridView
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
-        android:background="#DDDDDD"
-        ></GridView>
+
+        <HorizontalScrollView
+
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:background="#DDDDDD"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnHijos"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+                <!--android:padding="10dp"-->
+
+
+                <!--<Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="#f00"
+                    android:padding="10dp"
+                    android:text="Button 1"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:background="#f00"
+                    android:padding="10dp"
+                    android:text="Button 1"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />-->
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
@@ -17,12 +54,14 @@
         android:layout_gravity="center">
 
     </com.google.android.gms.maps.MapView>
-    <GridView
-        android:layout_height="100dp"
+
+
+    <ListView
+        android:id="@+id/ListViewNotificaciones"
         android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:background="#DDDDDD"
-        ></GridView>
+        android:background="#DDDDDD" />
 
 
 </LinearLayout>
