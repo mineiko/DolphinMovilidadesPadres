@@ -5,7 +5,7 @@
     android:orientation="vertical"
     tools:context="com.tyddolphin.apppadres.FragmentMapa">
 
-        <HorizontalScrollView
+        <!--<HorizontalScrollView
 
             android:layout_height="60dp"
             android:layout_width="match_parent"
@@ -18,10 +18,10 @@
                 android:layout_height="fill_parent"
                 android:orientation="horizontal"
                 android:layout_margin="10dp">
-                <!--android:padding="10dp"-->
 
 
-                <!--<Button
+
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -40,11 +40,11 @@
                     android:padding="10dp"
                     android:text="Button 1"
                     android:textColor="#fff"
-                    android:textSize="20sp" />-->
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
-        </HorizontalScrollView>
+        </HorizontalScrollView>-->
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapview"
@@ -52,16 +52,22 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center">
+        <Button android:id="@+id/googlemaps_select_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Select"/>
 
     </com.google.android.gms.maps.MapView>
 
 
-    <ListView
+    <!--<ListView
         android:id="@+id/ListViewNotificaciones"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_gravity="bottom"
-        android:background="#DDDDDD" />
+        android:background="#DDDDDD" />-->
 
 
 </LinearLayout>
