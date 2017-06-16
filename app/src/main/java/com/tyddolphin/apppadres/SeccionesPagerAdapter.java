@@ -14,8 +14,10 @@ class SeccionesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
+        if(position==0)return new FragmentMapa();
         if(position==1)return new FragmentHijos();
+        if(position==2)return new FragmentMovilidad();
+        if(position==3)return new FragmentUsuario();
 
         return new FragmentMapa();
 

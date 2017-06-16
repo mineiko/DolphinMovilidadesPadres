@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#00838f</color>
     <color name="colorAccent">#18ffff</color>
     <color name="colorbotones">#26c6da</color>
+    <color name="colorbotones2">#b2ebf2</color>#
+    <color name="colorAlertaRojo">#ef5350</color>
+    <color name="colorAlertaAmarillo">#fdd835</color>
 </resources>

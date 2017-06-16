@@ -52,15 +52,29 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center">
-        <Button android:id="@+id/googlemaps_select_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:text="Select"/>
+
 
     </com.google.android.gms.maps.MapView>
 
+    <HorizontalScrollView
+
+
+            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:background="#DDDDDD"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btn"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+             </LinearLayout>
+
+    </HorizontalScrollView>
 
     <!--<ListView
         android:id="@+id/ListViewNotificaciones"
