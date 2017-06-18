@@ -63,6 +63,7 @@ public class FragmentMapa extends Fragment {
     private static final LatLng MELBOURNE = new LatLng(-16.449909, -71.536766);
 
     private Marker Movilidad;
+    private Marker MovilidadA;
     private Marker mHijo1;
     private Marker mHijo2;
     private Marker mCasa;
@@ -141,15 +142,17 @@ public class FragmentMapa extends Fragment {
                 //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
             }
             if (id==2){
-                builder.setContentTitle("Notificacion Basica");
-                builder.setContentText("Momento para aprender mas sobre Android!");
+                builder.setContentTitle("Movilidad : José");
+                builder.setContentText("Alerta : Accidente");
+                mHijo1.remove();
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Yendo al colegio")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                MovilidadA = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
                 //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
             }
-
-
-
-
-
             //Enviar la notificacion
             NotificationManager notificationManager= (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(id,builder.build());
@@ -186,6 +189,8 @@ public class FragmentMapa extends Fragment {
             badge = R.drawable.b1;
         }else if (marker.equals(mHijo2)) {
             badge = R.drawable.a1;
+        }else if (marker.equals(MovilidadA)) {
+            badge = R.drawable.b1;
         }else{
             badge = 0;
         }
@@ -246,14 +251,14 @@ public class FragmentMapa extends Fragment {
         btnA.setOnClickListener(new Notificaciones(0));
         btnB.setText("Recogio Alumno");
         btnB.setOnClickListener(new Notificaciones(1));
-        btnC.setText("Inicio Recorrido");
+        btnC.setText("Alerta Accidente");
         btnC.setOnClickListener(new Notificaciones(2));
-        btnD.setText("Inicio Recorrido");
+        //btnD.setText("Inicio Recorrido");
 
         mLinearLayout.addView(btnA);
         mLinearLayout.addView(btnB);
         mLinearLayout.addView(btnC);
-        mLinearLayout.addView(btnD);
+        //mLinearLayout.addView(btnD);
         /*final Hijo[] Hijos  = new Hijo[2];
         Hijos[0] = new Hijo("Maria",-16.450452, -71.537035);
         Hijos[1] = new Hijo("Jose",-16.450, -71.537);
