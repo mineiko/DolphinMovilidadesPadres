@@ -49,10 +49,10 @@ public class FragmentHijos extends Fragment {
         LinearLayout.LayoutParams Params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        textView.setText(nombre);
+        //textView.setText(nombre);
         //textView.setTypeface(null, Typeface.BOLD);
-        textView.setTextColor(Color.BLACK);
-        textView.setTextSize(15);
+        //textView.setTextColor(Color.BLACK);
+        //textView.setTextSize(15);
         textView.setHeight(80);
         textView.setWidth(100);
         textView.setGravity(Gravity.CENTER);

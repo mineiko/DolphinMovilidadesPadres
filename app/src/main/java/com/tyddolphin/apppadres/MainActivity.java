@@ -24,10 +24,11 @@ public class MainActivity extends AppCompatActivity {
         Tabs.setupWithViewPager(mViewPager);
 
 
-        setIconoOnTab(0,R.drawable.ic_place_white_36dp);
+        setIconoOnTab(0,R.drawable.ic_person_pin_circle_white_36dp);
         setIconoOnTab(1,R.drawable.ic_face_white_36dp);
         setIconoOnTab(2,R.drawable.ic_directions_bus_white_36dp);
         setIconoOnTab(3,R.drawable.ic_account_box_white_36dp);
+        setIconoOnTab(4,R.drawable.ic_settings_white_36dp);
     }
 
     private void setIconoOnTab(int tabID, @DrawableRes int drawable){

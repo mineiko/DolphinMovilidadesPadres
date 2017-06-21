@@ -18,6 +18,7 @@ class SeccionesPagerAdapter extends FragmentPagerAdapter {
         if(position==1)return new FragmentHijos();
         if(position==2)return new FragmentMovilidad();
         if(position==3)return new FragmentUsuario();
+        if(position==4)return new FragmentConfiguracion();
 
         return new FragmentMapa();
 
@@ -25,7 +26,7 @@ class SeccionesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
 }

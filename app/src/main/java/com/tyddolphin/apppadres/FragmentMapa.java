@@ -63,10 +63,17 @@ public class FragmentMapa extends Fragment {
     private static final LatLng MELBOURNE = new LatLng(-16.449909, -71.536766);
 
     private Marker Movilidad;
-    private Marker MovilidadA;
+    /*private Marker MovilidadA;
+    private Marker MovilidadB;
+    private Marker MovilidadC;*/
     private Marker mHijo1;
     private Marker mHijo2;
     private Marker mCasa;
+
+    LinearLayout mLinearLayout;
+    MapView mMapView;
+    GoogleMap googlemap;
+    ListView mlistView;
 
     //private Button infoButton;
     //private ViewGroup infoWindow;
@@ -92,21 +99,33 @@ public class FragmentMapa extends Fragment {
         Notificaciones(int i){
             id = i;
         }
+
+        public void EliminarOtros(){
+            if (a!=null) a.remove();
+            if (Movilidad!=null) Movilidad.remove();
+            if (mHijo1!=null) mHijo1.remove();
+            /*if (MovilidadA!=null) MovilidadA.remove();
+            if (MovilidadB!=null) MovilidadB.remove();
+            if (MovilidadC!=null) MovilidadC.remove();*/
+        }
         @Override
         public void onClick(View view) {
             //Construccion de la accion del intent implicito
             Intent intent= new Intent(getContext(),FragmentMapa.class);
             PendingIntent pendingIntent=PendingIntent.getActivity(getContext(),0,intent,0);
             //Construccion de la notificacion;
-            NotificationCompat.Builder builder= new NotificationCompat.Builder(getContext());
-            builder.setSmallIcon(R.drawable.ic_directions_bus_black_24dp);
-            builder.setContentIntent(pendingIntent);
-            builder.setAutoCancel(true);
-            builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icono));
-            //Polyline a = new Polyline();
+            NotificationCompat.Builder builder= new NotificationCompat.Builder(getContext())
+                    .setSmallIcon(R.drawable.ic_directions_bus_black_36dp)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icono));
+
+
+            EliminarOtros();
+
             if (id==0){
-                builder.setContentTitle("Movilidad : José");
-                builder.setContentText("Inicio su Recorrido");
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Inicio su Recorrido");
                 //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
                 //googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(n.Ubicacion, 18));
                 a =  googlemap.addPolyline(new PolylineOptions()
@@ -123,15 +142,15 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions moMovilidades = new MarkerOptions()
                         .position(BRISBANE)
                         .title("Movilidad : José ").snippet("Llega en 5 min")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_24dp));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
                 Movilidad = googlemap.addMarker(moMovilidades);
 
             }
             if (id==1){
-                builder.setContentTitle("Movilidad : José");
-                builder.setContentText("Acaba de recoger a su Hij@ : María");
-                a.remove();
-                Movilidad.remove();
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Acaba de recoger a su Hij@ : María");
+                //a.remove();
+                //Movilidad.remove();
                 MarkerOptions moHijo = new MarkerOptions()
                         .position(MELBOURNE)
                         .title("María").snippet("Yendo al colegio")
@@ -142,16 +161,116 @@ public class FragmentMapa extends Fragment {
                 //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
             }
             if (id==2){
-                builder.setContentTitle("Movilidad : José");
-                builder.setContentText("Alerta : Accidente");
-                mHijo1.remove();
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Alerta : Trafico");
+                //mHijo1.remove();
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Yendo al colegio")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                mHijo1 = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
+                //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
+
+            }
+            if (id==3) {
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Alerta : Accidente");
+                //MovilidadA.remove();
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Yendo al colegio")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                MovilidadA = googlemap.addMarker(Movilidad01);
+                mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
-                //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
+            }
+            if (id==4) {
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Alerta : Falla Mecanica");
+                //MovilidadB.remove();
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Yendo al colegio")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                mHijo1 = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
+            }
+            if (id==5) {
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Alerta : Hij@ Enfermo")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Alerta : Hijo Enfermo\nSu hija Maria se enfermo, la estamos llevando a su hogar"));
+
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Yendo a su hogar")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                mHijo1 = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
+            }
+            if (id==6) {
+                builder.setContentTitle("Movilidad : José")
+                .setContentText("Alerta : Retraso")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Alerta : Retraso\nHemos tenido algunos problemas, pronto llegaremos"));
+                //MovilidadB.remove();
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("Movilidad : José ").snippet("Llega en 5 min")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                Movilidad = googlemap.addMarker(Movilidad01);
+                //googlemap.setInfoWindowAdapter(new B());
+            }
+            if (id==7) {
+                builder.setContentTitle("Movilidad : José")
+                        .setContentText("Alerta : Carro Detenido")
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText("Alerta : Carro Detenido\nLa Movilidad esta mucho tiempo detenido"));
+
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Movilidad Detenida")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                mHijo1 = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
+            }
+            if (id==8) {
+                builder.setContentTitle("Movilidad : José")
+                        .setContentText("Notificación : Estado Normal")
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText("Notificación : Estado Normal\nLa Movilidad esta haciendo su transcurso sin complicaciones"));
+
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Yendo al colegio")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                mHijo1 = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
+            }
+            if (id==9) {
+                builder.setContentTitle("Movilidad : José")
+                        .setContentText("Notificación : Llego al Colegio")
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText("Notificación : Llego al Colegio\nLa Movilidad Llego al colegio y espera confirmación"));
+
+                MarkerOptions Movilidad01 = new MarkerOptions()
+                        .position(new LatLng(-16.449661, -71.536486))
+                        .title("María").snippet("Llego al colegio")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                mHijo1 = googlemap.addMarker(Movilidad01);
+                googlemap.setInfoWindowAdapter(new B());
+            }
+            if (id==10) {
+                builder.setContentTitle("Movilidad : José")
+                        .setContentText("Notificación : Jornada Finalizada")
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText("Notificación : Jornada Finalizada\nLa Movilidad finalizo su jornada sin problemas"));
+
+                MarkerOptions moMovilidades = new MarkerOptions()
+                        .position(BRISBANE)
+                        .title("Movilidad : José ").snippet("Finalizo su Jornada")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+                Movilidad = googlemap.addMarker(moMovilidades);
             }
             //Enviar la notificacion
             NotificationManager notificationManager= (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -185,12 +304,10 @@ public class FragmentMapa extends Fragment {
     private void render(Marker marker, View view) {
         int badge;
         // Use the equals() method on a Marker to check for equals.  Do not use ==.
-        if (marker.equals(mHijo1)) {
+        if (marker.equals(mHijo1) ) {
             badge = R.drawable.b1;
         }else if (marker.equals(mHijo2)) {
             badge = R.drawable.a1;
-        }else if (marker.equals(MovilidadA)) {
-            badge = R.drawable.b1;
         }else{
             badge = 0;
         }
@@ -223,10 +340,7 @@ public class FragmentMapa extends Fragment {
 
     }
 
-    LinearLayout mLinearLayout;
-    MapView mMapView;
-    GoogleMap googlemap;
-    ListView mlistView;
+
 
 
 
@@ -247,18 +361,48 @@ public class FragmentMapa extends Fragment {
         Button btnB = new Button(super.getContext());
         Button btnC = new Button(super.getContext());
         Button btnD = new Button(super.getContext());
+        Button btnE = new Button(super.getContext());
+        Button btnF = new Button(super.getContext());
+        Button btnG = new Button(super.getContext());
+        Button btnH = new Button(super.getContext());
+        Button btnI = new Button(super.getContext());
+        Button btnJ = new Button(super.getContext());
+        Button btnK = new Button(super.getContext());
         btnA.setText("Inicio Recorrido");
         btnA.setOnClickListener(new Notificaciones(0));
         btnB.setText("Recogio Alumno");
         btnB.setOnClickListener(new Notificaciones(1));
-        btnC.setText("Alerta Accidente");
+        btnC.setText("Alerta Trafico");
         btnC.setOnClickListener(new Notificaciones(2));
-        //btnD.setText("Inicio Recorrido");
+        btnD.setText("Alerta Accidente");
+        btnD.setOnClickListener(new Notificaciones(3));
+        btnE.setText("Alerta Falla Mecanica");
+        btnE.setOnClickListener(new Notificaciones(4));
+        btnF.setText("Alumno Enfermo: Padres");
+        btnF.setOnClickListener(new Notificaciones(5));
+        btnG.setText("Alumno Enfermo: Otros Padres");
+        btnG.setOnClickListener(new Notificaciones(6));
+        btnH.setText("Carro Detenido (automatico)");
+        btnH.setOnClickListener(new Notificaciones(7));
+        btnI.setText("Notificación Estado Normal");
+        btnI.setOnClickListener(new Notificaciones(8));
+        btnJ.setText("Llego al colegio y espera");
+        btnJ.setOnClickListener(new Notificaciones(9));
+        btnK.setText("Finalizo la Jornada");
+        btnK.setOnClickListener(new Notificaciones(10));
 
         mLinearLayout.addView(btnA);
         mLinearLayout.addView(btnB);
         mLinearLayout.addView(btnC);
-        //mLinearLayout.addView(btnD);
+        mLinearLayout.addView(btnD);
+        mLinearLayout.addView(btnE);
+        mLinearLayout.addView(btnF);
+        mLinearLayout.addView(btnG);
+        mLinearLayout.addView(btnH);
+        mLinearLayout.addView(btnI);
+        mLinearLayout.addView(btnJ);
+        mLinearLayout.addView(btnK);
+
         /*final Hijo[] Hijos  = new Hijo[2];
         Hijos[0] = new Hijo("Maria",-16.450452, -71.537035);
         Hijos[1] = new Hijo("Jose",-16.450, -71.537);
@@ -284,7 +428,8 @@ public class FragmentMapa extends Fragment {
         mMapView.getMapAsync(new OnMapReadyCallback() {
             public void onMapReady(GoogleMap _googleMap) {
                 googlemap = _googleMap;
-
+                LatLng mll = new LatLng(-16.449886, -71.536874);
+                googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(mll, 18));
                 /*LatLng mll = new LatLng(-16.450452, -71.537035);//latitud y longitud
                 googlemap.moveCamera(CameraUpdSateFactory.newLatLngZoom(mll, 18));
                 MarkerOptions marker_options = new MarkerOptions()
@@ -292,7 +437,7 @@ public class FragmentMapa extends Fragment {
                         .title("Holi").snippet("Population: 4,137,400").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_24dp));
                 //googlemap.addPolyline(new PolylineOptions().add(new LatLng(-16.450452, -71.537035)).add(new LatLng(-16.4504, -71.5370)));
                 Marker m = googlemap.addMarker(marker_options);*/
-                googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(BRISBANE, 18));
+                //googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(BRISBANE, 18));
 
                 /*googlemap.addPolyline(new PolylineOptions()
                         .add(new LatLng(-16.449496, -71.534201))
