@@ -142,7 +142,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions moMovilidades = new MarkerOptions()
                         .position(BRISBANE)
                         .title("Movilidad : José ").snippet("Llega en 5 min")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_directions_bus_black_36dp));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_verde));
                 Movilidad = googlemap.addMarker(moMovilidades);
 
             }
@@ -154,7 +154,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions moHijo = new MarkerOptions()
                         .position(MELBOURNE)
                         .title("María").snippet("Yendo al colegio")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_verde));
                 mHijo1 = googlemap.addMarker(moHijo);
 
                 googlemap.setInfoWindowAdapter(new B());
@@ -167,7 +167,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Yendo al colegio")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_amarillo));
                 mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
                 //builder.setSubText("Toca para ver la documentacion acerca de Anndroid.");
@@ -180,7 +180,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Yendo al colegio")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_rojo));
                 mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
             }
@@ -191,7 +191,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Yendo al colegio")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_amarillo));
                 mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
             }
@@ -204,7 +204,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Yendo a su hogar")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_anaranjado));
                 mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
             }
@@ -217,7 +217,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("Movilidad : José ").snippet("Llega en 5 min")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_amarillo));
                 Movilidad = googlemap.addMarker(Movilidad01);
                 //googlemap.setInfoWindowAdapter(new B());
             }
@@ -230,7 +230,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Movilidad Detenida")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_amarillo));
                 mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
             }
@@ -243,7 +243,7 @@ public class FragmentMapa extends Fragment {
                 MarkerOptions Movilidad01 = new MarkerOptions()
                         .position(new LatLng(-16.449661, -71.536486))
                         .title("María").snippet("Yendo al colegio")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_verde));
                 mHijo1 = googlemap.addMarker(Movilidad01);
                 googlemap.setInfoWindowAdapter(new B());
             }
