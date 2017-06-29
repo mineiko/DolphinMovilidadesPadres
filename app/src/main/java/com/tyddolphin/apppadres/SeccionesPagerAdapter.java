@@ -11,17 +11,17 @@ class SeccionesPagerAdapter extends FragmentPagerAdapter {
     SeccionesPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+    private Fragment fragments[] = {
+        new FragmentMapa(),
+        new FragmentHijos(),
+        new FragmentMovilidad(),
+        new FragmentUsuario(),
+        new FragmentConfiguracion(),
+    };
 
     @Override
     public Fragment getItem(int position) {
-        if(position==0)return new FragmentMapa();
-        if(position==1)return new FragmentHijos();
-        if(position==2)return new FragmentMovilidad();
-        if(position==3)return new FragmentUsuario();
-        if(position==4)return new FragmentConfiguracion();
-
-        return new FragmentMapa();
-
+        return fragments[position];
     }
 
     @Override
