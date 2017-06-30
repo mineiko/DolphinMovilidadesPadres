@@ -48,6 +48,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.tyddolphin.apppadres.rest.Ubicacion;
 import com.tyddolphin.apppadres.rest.Rest;
+import com.tyddolphin.apppadres.signalR.SignalR;
 
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -66,9 +67,6 @@ public class FragmentMapa extends Fragment {
     private static final LatLng MELBOURNE = new LatLng(-16.449909, -71.536766);
 
     private Marker Movilidad;
-    /*private Marker MovilidadA;
-    private Marker MovilidadB;
-    private Marker MovilidadC;*/
     private Marker mHijo1;
     private Marker mHijo2;
     private Marker mCasa;
@@ -99,9 +97,10 @@ public class FragmentMapa extends Fragment {
         }
     }*/
     Polyline a;
+    /*
     class Notificaciones implements View.OnClickListener{
         int id;
-        Notificaciones(int i){
+        Notificaciones(int i, Context context, Class<FragmentMapa> fragmentMapaClass, String s, String s1, String s2){
             id = i;
         }
 
@@ -109,9 +108,7 @@ public class FragmentMapa extends Fragment {
             if (a!=null) a.remove();
             if (Movilidad!=null) Movilidad.remove();
             if (mHijo1!=null) mHijo1.remove();
-            /*if (MovilidadA!=null) MovilidadA.remove();
-            if (MovilidadB!=null) MovilidadB.remove();
-            if (MovilidadC!=null) MovilidadC.remove();*/
+
         }
         @Override
         public void onClick(View view) {
@@ -139,11 +136,11 @@ public class FragmentMapa extends Fragment {
                         .add(new LatLng(-16.449661, -71.536486))
                         .add(new LatLng(-16.449918, -71.536840)));
 
-                /*googlemap.addPolyline(new PolylineOptions()
-                        .add(new LatLng(-16.449496, -71.534201))
-                        .add(new LatLng(-16.450648, -71.535639))
-                        .add(new LatLng(-16.449661, -71.536486))
-                        .add(new LatLng(-16.449918, -71.536840)));*/
+//                googlemap.addPolyline(new PolylineOptions()
+//                        .add(new LatLng(-16.449496, -71.534201))
+//                        .add(new LatLng(-16.450648, -71.535639))
+//                        .add(new LatLng(-16.449661, -71.536486))
+//                        .add(new LatLng(-16.449918, -71.536840)));
                 MarkerOptions moMovilidades = new MarkerOptions()
                         .position(BRISBANE)
                         .title("Movilidad : José ").snippet("Llega en 5 min")
@@ -281,7 +278,7 @@ public class FragmentMapa extends Fragment {
             NotificationManager notificationManager= (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(id,builder.build());
         }
-    }
+    }*/
     class B implements InfoWindowAdapter{
         private final View mWindow;
 
@@ -376,12 +373,36 @@ public class FragmentMapa extends Fragment {
         rest.GenerarRuta(inicio,fin, null);
     }
 
+    MarkerOptions moMovilidades;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mapa, container, false);
         mLinearLayout = (LinearLayout) view.findViewById(R.id.btn);
+
+        SignalR.IJListener = new SignalR.onIniciarJornada() {
+            @Override
+            public void onIJ(Integer id, Ubicacion ubicacion) {
+                new Notificaciones(1,getContext(),FragmentMapa.class,"Movilidad : Jose"  ,"Inicio su Recorrido", "");
+                moMovilidades = new MarkerOptions()
+                        .position(new LatLng(ubicacion.Latitud,ubicacion.Longitud))
+                        .title("Movilidad : José ")//.snippet("Llega en 5 min")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_bus_verde));
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Movilidad = googlemap.addMarker(moMovilidades);
+                        googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(Movilidad.getPosition(), 18));
+                    }
+                });
+
+                
+
+
+
+            }
+        };
 
         /*Button btnA = new Button(super.getContext());
         Button btnB = new Button(super.getContext());
@@ -454,7 +475,7 @@ public class FragmentMapa extends Fragment {
         mMapView.getMapAsync(new OnMapReadyCallback() {
             public void onMapReady(GoogleMap _googleMap) {
                 googlemap = _googleMap;
-                LatLng mll = new LatLng(-16.449886, -71.536874);
+                LatLng mll = new LatLng(-16.377030411719353,-71.51785483593756);
                 googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(mll, 18));
                 /*LatLng mll = new LatLng(-16.450452, -71.537035);//latitud y longitud
                 googlemap.moveCamera(CameraUpdSateFactory.newLatLngZoom(mll, 18));

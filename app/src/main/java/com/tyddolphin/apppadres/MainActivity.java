@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.tyddolphin.apppadres.signalR.SignalR;
+
 public class MainActivity extends AppCompatActivity {
 
     SeccionesPagerAdapter mSeccionesPagerAdapter;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setIconoOnTab(2,R.drawable.ic_directions_bus_white_36dp);
         setIconoOnTab(3,R.drawable.ic_account_box_white_36dp);
         setIconoOnTab(4,R.drawable.ic_settings_white_36dp);
+
+        SignalR.Iniciar(getApplicationContext());
     }
 
     private void setIconoOnTab(int tabID, @DrawableRes int drawable){

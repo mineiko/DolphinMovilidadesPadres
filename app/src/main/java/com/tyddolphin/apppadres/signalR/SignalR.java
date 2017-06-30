@@ -12,6 +12,7 @@ import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
 import microsoft.aspnet.signalr.client.hubs.HubConnection;
 import microsoft.aspnet.signalr.client.hubs.HubProxy;
 import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler1;
+import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler2;
 
 /**
  * Created by Gianella Milon on 27/06/2017.
@@ -19,16 +20,21 @@ import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler1;
 
 public class SignalR {
 
-    //public interface OnNuevaUbicacionMovilidadListener{
-    //    void OnUbicacionRecibida(Ubicacion ubicacion);
-    //}
+    public interface OnNuevaUbicacionMovilidadListener{
+        void OnUbicacionRecibida(Ubicacion ubicacion);
+    }
+    public interface onIniciarJornada{
+        void onIJ(Integer id, Ubicacion ubicacion);
+    };
+
 
     public static HubConnection mHubConnection;
     public static HubProxy mHubProxy;
     private static Context context;
     public static String mConnectionID;
 
-    //public OnNuevaUbicacionMovilidadListener listener;
+    public static OnNuevaUbicacionMovilidadListener listener;
+    public static onIniciarJornada IJListener;
     private SignalR(){}
     public static void Iniciar(Context c){
         context = c;
@@ -45,12 +51,15 @@ public class SignalR {
             signalRFuture.get();
             mConnectionID = mHubConnection.getConnectionId();
 
-            /*mHubProxy.on("Ubicacion", new SubscriptionHandler1<Ubicacion>() {//nombre del método, interfaz que se va a ejecutar,clase del parametro
-                @Override
-                public void run(Ubicacion ubicacion) {
-                    listener.OnUbicacionRecibida(ubicacion);
-                }
-            }, Ubicacion.class);*/
+            mHubProxy.on("InicioDeRecorrido", new SubscriptionHandler2<Integer, Ubicacion>() {//nombre del método, interfaz que se va a ejecutar,clase del parametro
+                            @Override
+                            public void run(Integer id,Ubicacion ubicacion) {
+                                IJListener.onIJ(id,ubicacion);
+
+                            }
+                        }, Integer.class, Ubicacion.class);
+
+            //mHubProxy.on(sdshdhdfhsf)
         }catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
