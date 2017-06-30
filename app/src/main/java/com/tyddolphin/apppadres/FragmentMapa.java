@@ -46,6 +46,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.tyddolphin.apppadres.rest.Ubicacion;
+import com.tyddolphin.apppadres.rest.Rest;
+
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
@@ -74,6 +77,8 @@ public class FragmentMapa extends Fragment {
     MapView mMapView;
     GoogleMap googlemap;
     ListView mlistView;
+
+    Rest rest;
 
     //private Button infoButton;
     //private ViewGroup infoWindow;
@@ -350,6 +355,27 @@ public class FragmentMapa extends Fragment {
 
     }
 
+    public void pruebaRutas(){
+        rest.GenerarRutaCompleted = new Rest.RestListener<Ubicacion[]>() {
+            @Override
+            public void onRespuesta(Ubicacion[] respuesta) {
+                final PolylineOptions po = new PolylineOptions();
+                for (Ubicacion ubicacion : respuesta){
+                    po.add(new LatLng(ubicacion.Latitud, ubicacion.Longitud));
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        googlemap.addPolyline(po);
+                    }
+                });
+            }
+        };
+        Ubicacion inicio = new Ubicacion(-16.380664, -71.522006);
+        Ubicacion fin = new Ubicacion(-16.449797, -71.536841);
+        rest.GenerarRuta(inicio,fin, null);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -357,7 +383,7 @@ public class FragmentMapa extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mapa, container, false);
         mLinearLayout = (LinearLayout) view.findViewById(R.id.btn);
 
-        Button btnA = new Button(super.getContext());
+        /*Button btnA = new Button(super.getContext());
         Button btnB = new Button(super.getContext());
         Button btnC = new Button(super.getContext());
         Button btnD = new Button(super.getContext());
@@ -401,7 +427,7 @@ public class FragmentMapa extends Fragment {
         mLinearLayout.addView(btnH);
         mLinearLayout.addView(btnI);
         mLinearLayout.addView(btnJ);
-        mLinearLayout.addView(btnK);
+        mLinearLayout.addView(btnK);*/
 
         /*final Hijo[] Hijos  = new Hijo[2];
         Hijos[0] = new Hijo("Maria",-16.450452, -71.537035);
@@ -517,6 +543,18 @@ public class FragmentMapa extends Fragment {
 
             }
         });*/
+
+        Button btnRuta = new Button(super.getContext());
+        btnRuta.setText("Ruta");
+        btnRuta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pruebaRutas();
+            }
+        });
+        mLinearLayout.addView(btnRuta);
+
+        rest = new Rest(getActivity().getApplicationContext());
 
         return view;
     }
