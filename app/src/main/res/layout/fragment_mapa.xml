@@ -56,7 +56,7 @@
 
     </com.google.android.gms.maps.MapView>
 
-    <HorizontalScrollView
+    <!--<HorizontalScrollView
 
 
             android:layout_height="60dp"
@@ -74,7 +74,7 @@
 
              </LinearLayout>
 
-    </HorizontalScrollView>
+    </HorizontalScrollView>-->
 
     <!--<ListView
         android:id="@+id/ListViewNotificaciones"

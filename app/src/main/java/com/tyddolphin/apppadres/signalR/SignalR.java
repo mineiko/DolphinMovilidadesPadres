@@ -21,10 +21,13 @@ import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler2;
 public class SignalR {
 
     public interface OnNuevaUbicacionMovilidadListener{
-        void OnUbicacionRecibida(Ubicacion ubicacion);
+        void OnUbicacionRecibida(Integer id,Ubicacion ubicacion);
     }
     public interface onIniciarJornada{
         void onIJ(Integer id, Ubicacion ubicacion);
+    };
+    public interface onAlumnoRecogido{
+        void onAR(Integer mov);
     };
 
 
@@ -35,6 +38,7 @@ public class SignalR {
 
     public static OnNuevaUbicacionMovilidadListener listener;
     public static onIniciarJornada IJListener;
+    public static onAlumnoRecogido ARListener;
     private SignalR(){}
     public static void Iniciar(Context c){
         context = c;
@@ -59,10 +63,32 @@ public class SignalR {
                             }
                         }, Integer.class, Ubicacion.class);
 
-            //mHubProxy.on(sdshdhdfhsf)
+            mHubProxy.on("NuevaUbicacion", new SubscriptionHandler2<Integer, Ubicacion>() {
+
+                @Override
+                public void run(Integer id, Ubicacion ubicacion) {
+                    listener.OnUbicacionRecibida(id,ubicacion);
+                }
+            },Integer.class,Ubicacion.class);
+
+            mHubProxy.on("AlumnoRecogido", new SubscriptionHandler1<Integer>() {
+                @Override
+                public void run(Integer mov) {
+                    ARListener.onAR(mov);
+
+                }
+            }, Integer.class);
+            //mHubProxy.on("AlumnoNoVaAIr");
+
+
+
+
+
         }catch (ExecutionException | InterruptedException e){
             e.printStackTrace();
         }
+
+
     }
 
     public static void NuevaUbicacion(Ubicacion ubicacion)

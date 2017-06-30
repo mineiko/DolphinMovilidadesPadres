@@ -46,6 +46,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.tyddolphin.apppadres.rest.Alumno;
 import com.tyddolphin.apppadres.rest.Ubicacion;
 import com.tyddolphin.apppadres.rest.Rest;
 import com.tyddolphin.apppadres.signalR.SignalR;
@@ -284,7 +285,7 @@ public class FragmentMapa extends Fragment {
 
         private final View mContents;
 
-        B() {
+            B() {
             mWindow = getActivity().getLayoutInflater().inflate(R.layout.custom_info_window, null);
             mContents =getActivity(). getLayoutInflater().inflate(R.layout.custom_info_contents, null);
         }
@@ -308,7 +309,7 @@ public class FragmentMapa extends Fragment {
         // Use the equals() method on a Marker to check for equals.  Do not use ==.
         if (marker.equals(mHijo1) ) {
             badge = R.drawable.b1;
-        }else if (marker.equals(mHijo2)) {
+        }else if (marker.equals(Movilidad)) {
             badge = R.drawable.a1;
         }else{
             badge = 0;
@@ -343,7 +344,7 @@ public class FragmentMapa extends Fragment {
     }
 
 
-
+    Alumno hijo;
 
 
     @Override
@@ -379,12 +380,17 @@ public class FragmentMapa extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mapa, container, false);
-        mLinearLayout = (LinearLayout) view.findViewById(R.id.btn);
+        //mLinearLayout = (LinearLayout) view.findViewById(R.id.btn);
+
+        Ubicacion u = new Ubicacion(-16.399544, -71.548763);
+
+        hijo = new Alumno(1, "Mateo", u,"NO RECOGIDO");
 
         SignalR.IJListener = new SignalR.onIniciarJornada() {
             @Override
             public void onIJ(Integer id, Ubicacion ubicacion) {
                 new Notificaciones(1,getContext(),FragmentMapa.class,"Movilidad : Jose"  ,"Inicio su Recorrido", "");
+
                 moMovilidades = new MarkerOptions()
                         .position(new LatLng(ubicacion.Latitud,ubicacion.Longitud))
                         .title("Movilidad : José ")//.snippet("Llega en 5 min")
@@ -392,17 +398,45 @@ public class FragmentMapa extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //Toast.makeText(getContext(), "La Movilidad : Carlos, Acaba de Iniciar Recorrido", Toast.LENGTH_LONG).show();
+
                         Movilidad = googlemap.addMarker(moMovilidades);
                         googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(Movilidad.getPosition(), 18));
                     }
                 });
-
-                
-
-
-
             }
         };
+
+        SignalR.listener = new SignalR.OnNuevaUbicacionMovilidadListener(){
+
+            @Override
+            public void OnUbicacionRecibida(Integer id, final Ubicacion ubicacion) {
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Movilidad.setPosition(new LatLng(ubicacion.Latitud,ubicacion.Longitud));}});
+            }
+        };
+
+        SignalR.ARListener = new SignalR.onAlumnoRecogido(){
+
+            @Override
+            public void onAR(Integer mov) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(Movilidad.getPosition()==new LatLng(hijo.Casa.Latitud,hijo.Casa.Longitud)) {
+                            new Notificaciones(1, getContext(), FragmentMapa.class, "Movilidad : Carlos", "Acaba de recoger a su Hij@ :" + hijo.Nombre, "");
+                            Toast.makeText(getContext(), "La Movilidad : Carlos, Acaba de recoger a su hij@ " + hijo.Nombre, Toast.LENGTH_LONG).show();
+                            hijo.Estado = "RECOGIDO";
+                            Movilidad.setTitle(hijo.Nombre);
+                            Movilidad.setSnippet("Estado : " + hijo.Estado);
+                            googlemap.setInfoWindowAdapter(new B());
+                }}});
+            }
+        };
+
 
         /*Button btnA = new Button(super.getContext());
         Button btnB = new Button(super.getContext());
@@ -475,7 +509,7 @@ public class FragmentMapa extends Fragment {
         mMapView.getMapAsync(new OnMapReadyCallback() {
             public void onMapReady(GoogleMap _googleMap) {
                 googlemap = _googleMap;
-                LatLng mll = new LatLng(-16.377030411719353,-71.51785483593756);
+                LatLng mll = new LatLng(-16.399544, -71.548763);
                 googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(mll, 18));
                 /*LatLng mll = new LatLng(-16.450452, -71.537035);//latitud y longitud
                 googlemap.moveCamera(CameraUpdSateFactory.newLatLngZoom(mll, 18));
@@ -503,7 +537,7 @@ public class FragmentMapa extends Fragment {
 
 
                 MarkerOptions casa = new MarkerOptions()
-                        .position(new LatLng(-16.449918, -71.536840))
+                        .position(new LatLng(-16.399544, -71.548763))
                         .title("Casa")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_home_black_36dp));
                 mCasa = googlemap.addMarker(casa);
@@ -522,10 +556,10 @@ public class FragmentMapa extends Fragment {
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));*/
 
 
-        MarkerOptions marker_options2 = new MarkerOptions()
-                .position(MELBOURNE)
-                .title("Jose").snippet("Llega en 7 min")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//        MarkerOptions marker_options2 = new MarkerOptions()
+//                .position(MELBOURNE)
+//                .title("Jose").snippet("Llega en 7 min")
+//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         /*mlistView = (ListView) view.findViewById(R.id.ListViewNotificaciones);
         final Notificaciones[] items = {
                 new Notificaciones(1, "Jose", "Trafico", Color.YELLOW),
@@ -565,17 +599,17 @@ public class FragmentMapa extends Fragment {
             }
         });*/
 
-        Button btnRuta = new Button(super.getContext());
-        btnRuta.setText("Ruta");
-        btnRuta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pruebaRutas();
-            }
-        });
-        mLinearLayout.addView(btnRuta);
-
-        rest = new Rest(getActivity().getApplicationContext());
+//        Button btnRuta = new Button(super.getContext());
+//        btnRuta.setText("Ruta");
+//        btnRuta.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pruebaRutas();
+//            }
+//        });
+//        mLinearLayout.addView(btnRuta);
+//
+//        rest = new Rest(getActivity().getApplicationContext());
 
         return view;
     }

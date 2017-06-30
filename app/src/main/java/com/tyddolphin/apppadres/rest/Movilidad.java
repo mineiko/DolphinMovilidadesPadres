@@ -5,6 +5,7 @@ package com.tyddolphin.apppadres.rest;
  */
 
 class Movilidad {
+    public int Id;
     public String Nombre;
     public Alumno[] Alumnos;
 }

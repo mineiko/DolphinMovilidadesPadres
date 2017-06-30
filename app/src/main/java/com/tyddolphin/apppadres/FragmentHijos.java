@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tyddolphin.apppadres.signalR.SignalR;
+
 
 public class FragmentHijos extends Fragment {
 
@@ -31,7 +33,8 @@ public class FragmentHijos extends Fragment {
         @Override
         public void onClick(View view) {
             if (id == 1){
-                Toast.makeText(getContext(), "Su hij@ no va a ir en la movilidad José", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Su hij@ no va a ir en la movilidad Carlos", Toast.LENGTH_LONG).show();
+                SignalR.AlumnoNoVaAIr(1);
             }
 
         }
@@ -40,6 +43,8 @@ public class FragmentHijos extends Fragment {
     public FragmentHijos() {
         // Required empty public constructor
     }
+
+
 
     public LinearLayout AgregarHijoLLO(String nombre, ImageView foto, Button b){
         LinearLayout temporal = new LinearLayout(getContext());
@@ -57,7 +62,7 @@ public class FragmentHijos extends Fragment {
         textView.setWidth(100);
         textView.setGravity(Gravity.CENTER);
         textView.setPadding(0,0,20,0);
-        foto.setImageResource(R.drawable.b1);
+        foto.setImageResource(R.drawable.a1);
         FrameLayout.LayoutParams ladderParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT);
         foto.setLayoutParams(ladderParams);
@@ -125,7 +130,7 @@ public class FragmentHijos extends Fragment {
         //mLinearLayout.addView(textView);
         //mLinearLayout.addView(button);
 
-        LLODinamica.addView(AgregarHijoLLO("María Paredes",ladder, button));
+        LLODinamica.addView(AgregarHijoLLO("Mateo Paredes",ladder, button));
         mLinearLayout.addView(LLODinamica);
         //LLODinamica.addView(textView);
         //LLODinamica.addView(button);
