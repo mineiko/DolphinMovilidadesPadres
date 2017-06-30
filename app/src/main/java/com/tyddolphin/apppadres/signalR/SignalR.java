@@ -27,7 +27,7 @@ public class SignalR {
         void onIJ(Integer id, Ubicacion ubicacion);
     };
     public interface onAlumnoRecogido{
-        void onAR(Integer mov);
+        void onAR(Integer idMovilidad, Integer idAlumno);
     };
 
 
@@ -71,13 +71,13 @@ public class SignalR {
                 }
             },Integer.class,Ubicacion.class);
 
-            mHubProxy.on("AlumnoRecogido", new SubscriptionHandler1<Integer>() {
+            mHubProxy.on("AlumnoRecogido", new SubscriptionHandler2<Integer,Integer>() {
                 @Override
-                public void run(Integer mov) {
-                    ARListener.onAR(mov);
+                public void run(Integer idMovilidad, Integer idAlumno) {
+                    ARListener.onAR(idMovilidad, idAlumno);
 
                 }
-            }, Integer.class);
+            }, Integer.class, Integer.class);
             //mHubProxy.on("AlumnoNoVaAIr");
 
 

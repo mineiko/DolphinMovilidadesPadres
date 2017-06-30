@@ -422,11 +422,11 @@ public class FragmentMapa extends Fragment {
         SignalR.ARListener = new SignalR.onAlumnoRecogido(){
 
             @Override
-            public void onAR(Integer mov) {
+            public void onAR(Integer mov, final Integer idAlumno) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(Movilidad.getPosition()==new LatLng(hijo.Casa.Latitud,hijo.Casa.Longitud)) {
+                        if(idAlumno==3) {
                             new Notificaciones(1, getContext(), FragmentMapa.class, "Movilidad : Carlos", "Acaba de recoger a su Hij@ :" + hijo.Nombre, "");
                             Toast.makeText(getContext(), "La Movilidad : Carlos, Acaba de recoger a su hij@ " + hijo.Nombre, Toast.LENGTH_LONG).show();
                             hijo.Estado = "RECOGIDO";
