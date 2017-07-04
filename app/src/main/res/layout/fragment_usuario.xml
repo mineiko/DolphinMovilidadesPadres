@@ -1,13 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tyddolphin.apppadres.FragmentUsuario">
+    tools:context="com.tyddolphin.apppadres.FragmentUsuario"
+    android:orientation="vertical">
 
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="200dp"
+        android:src="@drawable/a1"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:background="@color/colorAccent"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Christian Loza Peralta"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="8 años"/>
+
+</LinearLayout>
