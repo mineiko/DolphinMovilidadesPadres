@@ -1,64 +1,84 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tyddolphin.apppadres.FragmentMovilidad"
     android:orientation="vertical">
-
-    <Space
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
-     <ImageView
-         android:layout_width="170dp"
-         android:layout_height="200dp"
-         android:src="@mipmap/foto"
-         android:layout_gravity="center"
-         android:padding="10dp"
-         android:background="@color/colorAccent"
-         />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="Movilidad 01"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:padding="2dp"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+         <ImageView
+             android:layout_width="170dp"
+             android:layout_height="200dp"
+             android:src="@mipmap/foto"
+             android:layout_gravity="center"
+             android:padding="10dp"
+             android:background="@color/colorPrimaryDark"
+             />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Rodrigo Francisco Mendoza Melgar"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="23 años"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Rodrigo Francisco Mendoza Melgar"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="23 años"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="994837665"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="994837665"/>
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:src="@mipmap/movilidad"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:background="@color/colorAccent"/>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/movilidad"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:background="@color/colorPrimaryDark"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Nissan Urvan"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nissan Urvan"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="2001"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="2001"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="V6N-136"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="V6N-136"/>
 
 
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
