@@ -70,7 +70,8 @@ public class FragmentMapa extends Fragment {
     private Marker Movilidad;
     private Marker mHijo1;
     private Marker mHijo2;
-    private Marker mCasa;
+    public Marker mCasa;
+    public Marker Colegio;
 
     LinearLayout mLinearLayout;
     MapView mMapView;
@@ -416,6 +417,7 @@ public class FragmentMapa extends Fragment {
                     @Override
                     public void run() {
                         Movilidad.setPosition(new LatLng(ubicacion.Latitud,ubicacion.Longitud));}});
+                        googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(Movilidad.getPosition(), 18));
             }
         };
 
@@ -541,6 +543,10 @@ public class FragmentMapa extends Fragment {
                         .title("Casa")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_home_black_36dp));
                 mCasa = googlemap.addMarker(casa);
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(new LatLng(-16.405366, -71.550558))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_school_black_36dp));
+                Colegio = googlemap.addMarker(markerOptions);
                 //googlemap.setInfoWindowAdapter(new B());
                 //mHijo1 = googlemap.addMarker(marker_options1);
                 //mHijo2 = googlemap.addMarker(marker_options2);
