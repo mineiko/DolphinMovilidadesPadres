@@ -77,6 +77,7 @@ public class FragmentMapa extends Fragment {
     MapView mMapView;
     GoogleMap googlemap;
     ListView mlistView;
+    TextView tvTiempo;
 
     Rest rest;
 
@@ -353,7 +354,28 @@ public class FragmentMapa extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
+    Polyline polyline = null;
+    public void generarRuta(Ubicacion inicio, Ubicacion fin){
+        if (polyline != null)
+            polyline.remove();
+        rest = new Rest(this.getContext());
+        rest.GenerarRutaCompleted = new Rest.RestListener<Ubicacion[]>() {
+            @Override
+            public void onRespuesta(Ubicacion[] respuesta) {
+                final PolylineOptions po = new PolylineOptions();
+                for (Ubicacion ubicacion : respuesta){
+                    po.add(new LatLng(ubicacion.Latitud, ubicacion.Longitud));
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        polyline = googlemap.addPolyline(po);
+                    }
+                });
+            }
+        };
+        rest.GenerarRuta(inicio,fin, null);
+    }
     public void pruebaRutas(){
         rest.GenerarRutaCompleted = new Rest.RestListener<Ubicacion[]>() {
             @Override
@@ -392,6 +414,7 @@ public class FragmentMapa extends Fragment {
             public void onIJ(Integer id, Ubicacion ubicacion) {
                 new Notificaciones(1,getContext(),FragmentMapa.class,"Movilidad : Jose"  ,"Inicio su Recorrido", "");
 
+
                 moMovilidades = new MarkerOptions()
                         .position(new LatLng(ubicacion.Latitud,ubicacion.Longitud))
                         .title("Movilidad : José ")//.snippet("Llega en 5 min")
@@ -402,7 +425,7 @@ public class FragmentMapa extends Fragment {
                         //Toast.makeText(getContext(), "La Movilidad : Carlos, Acaba de Iniciar Recorrido", Toast.LENGTH_LONG).show();
 
                         Movilidad = googlemap.addMarker(moMovilidades);
-                        googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(Movilidad.getPosition(), 18));
+                        googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(Movilidad.getPosition(), 14));
                     }
                 });
             }
@@ -416,8 +439,15 @@ public class FragmentMapa extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Movilidad.setPosition(new LatLng(ubicacion.Latitud,ubicacion.Longitud));}});
-                        googlemap.moveCamera(CameraUpdateFactory.newLatLngZoom(Movilidad.getPosition(), 18));
+                        Movilidad.setPosition(new LatLng(ubicacion.Latitud,ubicacion.Longitud));
+                        googlemap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(ubicacion.Latitud,ubicacion.Longitud)));
+                        double dif = Math.sqrt(Math.pow(ubicacion.Latitud - -16.38908,2) + Math.pow(ubicacion.Longitud - -71.54932,2));
+                        if (dif < 0.001){
+                            new Notificaciones(1, getContext(), FragmentMapa.class, "Movilidad : Carlos", "Llegó al colegio", "");
+                            Toast.makeText(getContext(), "La Movilidad : Carlos, llegó al colegio", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
         };
 
@@ -425,6 +455,7 @@ public class FragmentMapa extends Fragment {
 
             @Override
             public void onAR(Integer mov, final Integer idAlumno) {
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -435,7 +466,16 @@ public class FragmentMapa extends Fragment {
                             Movilidad.setTitle(hijo.Nombre);
                             Movilidad.setSnippet("Estado : " + hijo.Estado);
                             googlemap.setInfoWindowAdapter(new B());
-                }}});
+                            tvTiempo.setText("La movilidad llegará al colegio en 10 minutos");
+                        } else if(idAlumno==1) {
+                            new Notificaciones(1, getContext(), FragmentMapa.class, "Movilidad : Carlos", "Está cerca", "");
+                            Toast.makeText(getContext(), "La Movilidad : Carlos está cerca", Toast.LENGTH_LONG).show();
+                            tvTiempo.setText("La movilidad llegará en 5 minutos");
+                            Ubicacion inicio = new Ubicacion(Movilidad.getPosition().latitude, Movilidad.getPosition().longitude);
+                            Ubicacion fin = new Ubicacion(-16.399544, -71.548763);
+                            generarRuta(inicio, fin);
+                        }
+                    }});
             }
         };
 
@@ -616,6 +656,8 @@ public class FragmentMapa extends Fragment {
 //        mLinearLayout.addView(btnRuta);
 //
 //        rest = new Rest(getActivity().getApplicationContext());
+
+        tvTiempo = (TextView) view.findViewById(R.id.tvTiempo);
 
         return view;
     }
