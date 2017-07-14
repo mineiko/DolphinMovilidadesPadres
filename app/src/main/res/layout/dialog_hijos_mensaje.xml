@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="Tipo de Mensaje"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:padding="2dp"/>
+
+
+    <RadioGroup
+        android:id="@+id/TipoMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+
+        <RadioButton
+            android:id="@+id/mensaje1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No va a ir en la Movilidad"
+            android:padding="5dp"
+            android:textSize="20dp"
+            />
+        <RadioButton
+            android:id="@+id/mensaje2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No va a ir al Colegio"
+            android:padding="5dp"
+            android:textSize="20dp"
+            />
+        <RadioButton
+            android:id="@+id/mensaje3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pedir que regrese la movilidad"
+            android:padding="5dp"
+            android:textSize="20dp"
+            />
+
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Enviar a..."
+
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:padding="6dp"
+
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Movilidad"
+                android:textSize="20dp"
+                android:checked="true"/>
+        </LinearLayout>
+        <LinearLayout
+
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Colegio"
+                android:textSize="20dp"
+                android:checked="true"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btnEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button"
+        android:text="@string/enviar"
+        android:textSize="20dp"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button"
+        android:textSize="20dp"
+        android:text="@string/cancelar"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
