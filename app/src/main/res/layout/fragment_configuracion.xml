@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notificaciones"
+        android:text="Configuracion"
         android:textSize="30dp"/>
 
     <Space
@@ -40,6 +40,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Llegada al colegio"
+        android:gravity="left"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:checked="true"/>
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Formato de Horas (24hs/12hs) "
         android:gravity="left"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"

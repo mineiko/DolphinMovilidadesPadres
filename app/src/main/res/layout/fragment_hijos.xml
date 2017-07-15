@@ -29,7 +29,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/a1"
                     android:layout_gravity="center"
-                    android:layout_margin="50dp"/>
+                    android:layout_margin="50dp"
+                    />
             </LinearLayout>
             <LinearLayout
 
@@ -40,15 +41,22 @@
 
                 <Button
                     android:id="@+id/mensaje"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Enviar Mensaje"
-                    android:textSize="15dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Generar Mensaje"
+                    android:textSize="13dp"
                     android:gravity="center"
-                    android:padding="45dp"
-                    android:background="@android:color/transparent"
+                    android:padding="15dp"
+
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/button"
+
                     android:drawableTop="@drawable/ic_markunread_black_48dp"
-                    android:layout_width="match_parent" />
+                    android:layout_width="wrap_content"
+                    />
             </LinearLayout>
 
         </LinearLayout>

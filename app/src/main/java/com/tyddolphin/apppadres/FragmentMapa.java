@@ -441,7 +441,7 @@ public class FragmentMapa extends Fragment {
                     public void run() {
                         Movilidad.setPosition(new LatLng(ubicacion.Latitud,ubicacion.Longitud));
                         googlemap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(ubicacion.Latitud,ubicacion.Longitud)));
-                        double dif = Math.sqrt(Math.pow(ubicacion.Latitud - -16.38908,2) + Math.pow(ubicacion.Longitud - -71.54932,2));
+                        double dif = Math.sqrt(Math.pow(ubicacion.Latitud - -16.405366,2) + Math.pow(ubicacion.Longitud - -71.550558,2));
                         if (dif < 0.001){
                             new Notificaciones(1, getContext(), FragmentMapa.class, "Movilidad : Carlos", "Llegó al colegio", "");
                             Toast.makeText(getContext(), "La Movilidad : Carlos, llegó al colegio", Toast.LENGTH_LONG).show();
